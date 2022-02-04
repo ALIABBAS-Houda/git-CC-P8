@@ -1,0 +1,70 @@
+                           Master 1 : Big Data
+                  Outils libres pour le développement logiciel
+                        ALI ABBAS Houda 14509339
+1- Définition :
+
+Le workflow Git-flow définit un modèle de branchement strict autour d'une version de projet. Autrement dit, c'est une des stratégies de développement qui tirent parti des capacités de création de branches de Git.
+Bien que plus complexe que Feature Branch Workflow, il fournit également une base solide pour la gestion de projets à grande échelle.
+Par rapport au workflow de branche de fonctionnalité, le processus Gitflow n'ajoute aucun nouveau concept ou commande. Sa spécialité est d'attribuer des rôles très clairs aux différentes branches et de définir des cas d'utilisation et comment l'utiliser.
+
+2- Avantages:
+	● Grâce aux règles communes, nous pouvons minimiser les problèmes qui surviennent lors de la collaboration.
+	● Gérer le code source afin de développer plus efficacement.
+	● Séparer l'exécution des tâches et le dépannage avec un retour d'état en temps réel
+	● Planifier le travail que nous souhaitons exécuter régulièrement en tant que flux de travail
+	● Déployer plusieurs tâches et les exécuter simultanément pour des tests de version efficaces
+	● Intégrer et déployer rapidement sur plusieurs plates-formes
+	● Adapté aux projets avec un cycle de livraison planifié et pour les bonne pratiques DevOps de livraison continue
+
+3- Inconvénients :
+	● La principale raison de l'échec est que ce git-flow processus est difficile à gérer dans un modèle de déploiement continu (ou quasi continu).
+
+4- Branches :
+	Git-flow utilise des branches de fonctionnalité et plusieurs branches primaires Les principales branches les plus centrales ici sont les master branches et les develop branches. Et il y a des feature branches, des release branches et des branches qui prennent en charge la branche principale hotfix.
+	● Master
+		- Une branche qui gère le code source publié en tant que produit pour les utilisateurs
+		- Gérer les versions par balises
+		- Aucun travail de développement
+	● Develop
+		- La branche où le travail de développement proprement dit est effectué
+		- Correction d'un bug
+		- De nouvelles fonctionnalités sont développées en créant une branche de fonctionnalité
+	● Feature
+		- Une branche créée à partir de la branche develop
+		- Développer de nouvelles fonctionnalités
+		- Fusionner dans la branche de développement lorsque le développement est terminé 
+	● Release
+		- Une branche créée à partir de la branche develop
+		- Une branche qui effectue des ajustements fins tels que des corrections de bogues, c'est-à-dire un contrôle qualité juste avant la publication
+		- Fusionner dans le maître, développer la branche
+	● Hotfix
+		- Une branche qui corrige rapidement les bugs dans les versions publiées
+		- Fusionner dans le maître, développer la branche immédiatement après la modification
+
+De cette façon, Git-flow nous permet de gérer le code source tout en clarifiant le but de chaque branche dans le processus de création, de modification et de fusion des branches.
+
+5-
+git tag -a <tag_name> -m "notre message" git push –tags
+
+6-
+Les commande doivent être passer sur la branche master et ne pas sur la branche feature donc :
+	- Nous commençons par créer la branche du Hotfix :
+		 git checkout -b hotfix/rendu master
+	- Nous nous mettons sur la branche Develop et ensuit nous créons le tag
+	- Ensuite, nous corrigeons le bug
+		 git commit -m "corriger le bug "
+	- Enfin nous faisons un commit dans master et dans develop
+		git checkout master
+		git merge --no-ff hotfix/rendu
+		git tag -a rendu -am "regler le bug " git checkout develop
+		git merge --no-ff hotfix/rendu
+	- Enfin nous supprimons la banche du Hotfix git branch -d hotfix/rendu
+
+7-
+	git merge release prod
+	git push origin release/rendu
+
+8- Git stash :
+	● Git stash est une fonctionnalité de Git qui vous permet de sauvegarder notre travail lorsque nous ne sommes pas prêts à nous engager.
+		git stash apply
+
